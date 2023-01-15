@@ -1,38 +1,25 @@
 import { useBattery } from "react-use";
 
+const batteryStyles = [
+  { level: 0.2, className: "gradient-color-red" },
+  { level: 0.4, className: "gradient-color-orange" },
+  { level: 0.8, className: "gradient-color-yellow" },
+  { className: "gradient-color-green" },
+];
+
 function BatteryLiquid() {
   const { level } = useBattery();
   const BatteryLiquidHeight = { height: `${parseInt(level * 100)}%` };
 
-  if (level <= 0.2) {
-    return (
-      <div
-        style={BatteryLiquidHeight}
-        className="battery__liquid gradient-color-red"
-      ></div>
-    );
-  } else if (level <= 0.4) {
-    return (
-      <div
-        style={BatteryLiquidHeight}
-        className="battery__liquid gradient-color-orange"
-      ></div>
-    );
-  } else if (level <= 0.8) {
-    return (
-      <div
-        style={BatteryLiquidHeight}
-        className="battery__liquid gradient-color-yellow"
-      ></div>
-    );
-  } else {
-    return (
-      <div
-        style={BatteryLiquidHeight}
-        className="battery__liquid gradient-color-green"
-      ></div>
-    );
-  }
+  const style = batteryStyles.find(({ level: lvl }) => lvl > level) || {};
+  const className = style.className || "gradient-color-green";
+
+  return (
+    <div
+      style={BatteryLiquidHeight}
+      className={`battery__liquid ${className}`}
+    ></div>
+  );
 }
 
 export default BatteryLiquid;

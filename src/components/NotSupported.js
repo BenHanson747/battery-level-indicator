@@ -4,12 +4,10 @@ function NotSupported() {
   const { isSupported } = useBattery();
 
   if (!isSupported) {
-    return (
-      <p>
-        The Battery Level Indicator is not currently supported in this browser.
-      </p>
-    );
+    return <p>Sorry, your browser does not support battery level indicator</p>;
   }
+
+  return null;
 }
 
 export default NotSupported;

@@ -4,8 +4,10 @@ function FetchingData() {
   const { fetched } = useBattery();
 
   if (!fetched) {
-    return <p>One moment... we are fetching the data we need.</p>;
+    return <p>Loading...</p>;
   }
+
+  return <p>Data fetched successfully!</p>;
 }
 
 export default FetchingData;

@@ -6,26 +6,31 @@ function BatteryStatus() {
   const red = { background: "var(--gradient-color-red)" };
   const green = { background: "var(--gradient-color-green)" };
 
-  if (level === 1) {
-    return (
-      <p className="battery__status">
-        Full Battery
-        <RiBattery2Fill style={green} />
-      </p>
-    );
-  } else if (level <= 0.2 && !charging) {
-    return (
-      <p className="battery__status">
-        Low battery <RiPlugLine style={red} />
-      </p>
-    );
-  } else if (charging) {
-    return (
-      <p className="battery__status">
-        Charging... <RiFlashlightLine style={green} />
-      </p>
-    );
+  let text, icon;
+
+  switch (true) {
+    case level === 1:
+      text = "Full Battery";
+      icon = <RiBattery2Fill style={green} />;
+      break;
+    case level <= 0.2 && !charging:
+      text = "Low battery";
+      icon = <RiPlugLine style={red} />;
+      break;
+    case charging:
+      text = "Charging...";
+      icon = <RiFlashlightLine style={green} />;
+      break;
+    default:
+      text = "";
+      icon = null;
   }
+
+  return (
+    <p className="battery__status">
+      {text} {icon}
+    </p>
+  );
 }
 
 export default BatteryStatus;
